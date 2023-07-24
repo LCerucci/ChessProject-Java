@@ -1,10 +1,15 @@
 package aplication;
 
+import board.Position;
+
 public class Programin {
 
 	public static void main(String[] args) {
-		System.out.println("Agora vai");
-
+		
+		Position p = new Position(3, 5);
+		
+		System.out.println(p.toString());
+		
 	}
 
 }
