@@ -3,14 +3,14 @@ package board;
 public class Position {
 
 	private int row;
-	private int collum;
+	private int column;
 	
 	public Position() {
 	}
 	
-	public Position(int row, int collum) {
+	public Position(int row, int column) {
 		this.row = row;
-		this.collum = collum;	
+		this.column = column;	
 	}
 
 	public int getRow() {
@@ -21,24 +21,25 @@ public class Position {
 		this.row = row;
 	}
 
-	public int getCollum() {
-		return collum;
+	public int getColumn() {
+		return column;
 	}
 
-	public void setCollum(int collum) {
-		this.collum = collum;
+	public void setColumn(int column) {
+		this.column = column;
 	}
 	
 	
-	public void setValues(int row, int collum) {
+	public void setValues(int row, int column) {
 		setRow(row);
-		setCollum(collum);
+		setColumn(column);
 	}
+	
 	
 	@Override
 	
 	public String toString() {
-		return row + ", " + collum;
+		return row + ", " + column;
 	}
 	
 }
