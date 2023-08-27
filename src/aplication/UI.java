@@ -1,7 +1,10 @@
 package aplication;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -43,13 +46,28 @@ public class UI {
 			char column = s.charAt(0);
 			int row = Integer.parseInt(s.substring(1));
 			return new ChessPosition(column, row);
+			
 		}catch(RuntimeException e){
 			throw new InputMismatchException("Error reading chess poosition, valid values a1-h8!");
 		}
 	}
 
-	public void printMacth(ChessMatch match) {
-		
+	public static void printMatch(ChessMatch match, List<ChessPiece> captured){
+		printBoard(match.getPieces());
+		System.out.println();
+		capturedPieces(captured);
+		System.out.println();
+		System.out.println("Turn: " + match.getTurn());
+		if(!match.getCheckMate()) {
+			System.out.println("Waiting player: " + match.getCurrentPlaye());
+			if(match.getCheck()) {
+				System.out.println("Your King is in check!");
+			}
+
+		}else {
+			System.out.println("Checkmate gentleman.");
+			System.out.println("Winner: " + match.getCurrentPlaye());
+		}
 	}
 	
 	public static void printBoard(ChessPiece[][] pieces) {
@@ -94,4 +112,20 @@ public class UI {
 		System.out.print(" ");
 	}
 
+	private static void capturedPieces(List<ChessPiece> captured) {
+		List<ChessPiece> white = captured.stream().filter (x -> x.getColor() == Color.WHITE).collect((Collectors.toList()));
+		List<ChessPiece> black = captured.stream().filter (x -> x.getColor() == Color.WHITE).collect((Collectors.toList()));
+		System.out.println("Captured pieces: ");
+		System.out.println("White: ");
+		System.out.println(ANSI_WHITE);
+		System.out.println(Arrays.toString(white.toArray()));
+		System.out.println(ANSI_RESET);
+		System.out.println("Black: ");
+		System.out.println(ANSI_YELLOW);
+		System.out.println(Arrays.toString(black.toArray()));
+		System.out.println(ANSI_RESET);
+	}
+	
+	
+	
 }
